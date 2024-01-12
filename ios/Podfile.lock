@@ -372,6 +372,8 @@ PODS:
     - React-perflogger (= 0.70.6)
   - RNCAsyncStorage (1.21.0):
     - React-Core
+  - RNGestureHandler (2.14.1):
+    - React-Core
   - RNReanimated (3.6.1):
     - DoubleConversion
     - FBLazyVector
@@ -472,6 +474,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -566,6 +569,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -624,6 +629,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
   RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
+  RNGestureHandler: e98441928705d9d1184b599d7c1c6df2dd4f7724
   RNReanimated: c5a0074efffd21f4af324e86b19468758fe39fa2
   RNScreens: fa9b582d85ae5d62c91c66003b5278458fed7aaa
   RNVectorIcons: bc7ee28cadf39c77a49232a14738dfce690f66cd
