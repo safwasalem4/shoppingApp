@@ -79,7 +79,7 @@ const style = StyleSheet.create({
     color: colors.font,
   },
   cartBadge: {
-    backgroundColor: colors.maincolor,
+    backgroundColor: colors.mainColor,
     position: 'absolute',
     right: -10,
     top: -10,

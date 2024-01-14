@@ -21,7 +21,6 @@ export const insertProducts = createAsyncThunk(
           },
         },
       );
-      console.log(result.data);
       return result.data;
     } catch (e) {
       console.log(e);
@@ -47,7 +46,6 @@ const productsSlice = createSlice({
       .addCase(
         `${insertProducts.fulfilled}`,
         (state, action: PayloadAction<any>) => {
-          console.log('Axxxxxx22222', action.payload.skip);
           if (action.payload.skip === 0) {
             state.allProducts = [...action.payload.products];
           } else {

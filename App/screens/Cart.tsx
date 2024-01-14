@@ -19,8 +19,8 @@ import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 type RootStackParamList = {
   Home: undefined;
-  // add other routes as needed
 };
+
 const Cart = ({}) => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(state => state.cart);
@@ -29,18 +29,9 @@ const Cart = ({}) => {
     <>
       <View>
         <SafeAreaView />
-        <Header title="Cart" backButton={true} cart={false} />
+        <Header title="Cart" backButton cart />
         {data.cart.length == 0 ? (
-          <Text
-            style={{
-              textAlign: 'center',
-              marginTop: height * 0.4,
-              color: colors.maincolor,
-              fontSize: 20,
-              fontWeight: 'bold',
-            }}>
-            Not Data Found :(
-          </Text>
+          <Text style={styles.emptyScreen}>Not Data Found :(</Text>
         ) : (
           <FlatList
             data={data.cart}
@@ -65,7 +56,7 @@ const Cart = ({}) => {
                           dispatch(
                             changeQuantity({
                               ...item,
-                              quantity: item.quantity + 1,
+                              quantity: item.quantity - 1,
                             }),
                           );
                         }}>
@@ -74,15 +65,13 @@ const Cart = ({}) => {
                           style={styles.addAndMinusView}
                         />
                       </TouchableOpacity>
-                      <Text style={{fontSize: 19, marginHorizontal: 13}}>
-                        {item.quantity}
-                      </Text>
+                      <Text style={styles.quantity}>{item.quantity}</Text>
                       <TouchableOpacity
                         onPress={() => {
                           dispatch(
                             changeQuantity({
                               ...item,
-                              quantity: item.quantity - 1,
+                              quantity: item.quantity + 1,
                             }),
                           );
                         }}>
@@ -102,25 +91,14 @@ const Cart = ({}) => {
         {data.cart.length !== 0 && (
           <>
             <View style={styles.separator} />
+
             <View style={styles.summeryContainer}>
-              <Text style={styles.summery}>Summery</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                }}>
+              <Text style={styles.summeryTitle}>Summery</Text>
+              <View style={styles.summery}>
                 <Text style={styles.title}>Total Products: </Text>
                 <Text style={styles.value}>{data.totalQuantity}</Text>
               </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                }}>
+              <View style={styles.summery}>
                 <Text style={styles.title}>Total Price: </Text>
                 <Text style={styles.value}>{data.totalPrice} $</Text>
               </View>
@@ -131,27 +109,24 @@ const Cart = ({}) => {
 
       <TouchableOpacity
         disabled={data.cart.length == 0}
-        onPress={() => {
-          dispatch(clearCart(null));
-          Alert.alert('Success', 'purchase Order Done', [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.reset({
-                  index: 1,
-                  routes: [{name: 'Home'}],
-                }),
-              style: 'cancel',
-            },
-          ]);
-        }}
         style={[
           styles.buttonStyle,
           {
             backgroundColor:
               data.cart.length == 0 ? colors.lightGray : colors.blue,
           },
-        ]}>
+        ]}
+        onPress={() => {
+          dispatch(clearCart(null));
+          Alert.alert('Success', 'purchase Order Done', [
+            {
+              text: 'Ok',
+              style: 'cancel',
+              onPress: () =>
+                navigation.reset({index: 1, routes: [{name: 'Home'}]}),
+            },
+          ]);
+        }}>
         <Text style={styles.buttonText}>Check Out</Text>
       </TouchableOpacity>
     </>
@@ -195,7 +170,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 18,
-    color: colors.maincolor,
+    color: colors.mainColor,
     fontWeight: 'bold',
   },
   quantityContainer: {
@@ -204,7 +179,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   addAndMinusView: {
-    tintColor: colors.maincolor,
+    tintColor: colors.mainColor,
     width: 24,
     height: 24,
     alignItems: 'center',
@@ -221,9 +196,9 @@ const styles = StyleSheet.create({
   summeryContainer: {
     paddingHorizontal: 16,
   },
-  summery: {
+  summeryTitle: {
     fontSize: 18,
-    color: colors.maincolor,
+    color: colors.mainColor,
     fontWeight: 'bold',
     marginVertical: 16,
   },
@@ -246,5 +221,22 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  emptyScreen: {
+    textAlign: 'center',
+    marginTop: height * 0.4,
+    color: colors.mainColor,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  quantity: {
+    fontSize: 19,
+    marginHorizontal: 13,
+  },
+  summery: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

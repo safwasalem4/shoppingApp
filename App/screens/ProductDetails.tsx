@@ -36,7 +36,7 @@ const ProductDetails = ({route}) => {
               {title + ' '}
               <Text style={styles.rate}>
                 {'(' + rating.toFixed(1) + ' '}
-                <FontAwesome name="star" size={15} color="orange" />
+                <FontAwesome name="star" size={15} color={colors.orange} />
                 {')'}
               </Text>
             </Text>
@@ -88,7 +88,7 @@ const ProductDetails = ({route}) => {
           onPress={() => {
             dispatch(addCart({...route.params.item, quantity: quantity}));
           }}>
-          <AntDesign name="shoppingcart" size={28} color={colors.maincolor} />
+          <AntDesign name="shoppingcart" size={28} color={colors.mainColor} />
         </TouchableOpacity>
       </View>
     </>
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: colors.maincolor,
+    color: colors.mainColor,
   },
   description: {
     fontSize: 16,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     fontSize: 20,
     fontWeight: 'bold',
-    color: colors.maincolor,
+    color: colors.mainColor,
   },
   specificationContainer: {
     marginTop: 8,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addAndMinusView: {
-    tintColor: colors.maincolor,
+    tintColor: colors.mainColor,
     width: 24,
     height: 24,
     alignItems: 'center',
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     height: 250,
   },
   buttonStyle: {
-    backgroundColor: colors.green,
+    backgroundColor: colors.blue,
     padding: 7,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   cartButton: {
     borderRadius: 30,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 10,
   },
   button: {

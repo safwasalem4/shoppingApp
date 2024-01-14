@@ -60,7 +60,7 @@ const Home = ({navigation}) => {
         )}
         ListFooterComponent={() => {
           if (data?.skip < data?.total || data?.loading)
-            return <ActivityIndicator color={colors.maincolor} />;
+            return <ActivityIndicator color={colors.mainColor} />;
           else return null;
         }}
         onEndReached={() => {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 18,
-    color: colors.maincolor,
+    color: colors.mainColor,
     fontWeight: 'bold',
   },
 });
