@@ -24,7 +24,7 @@ const cartSlice = createSlice({
       } else {
         state.totalQuantity = state.totalQuantity + action.payload.quantity;
         state.totalPrice += action.payload.quantity * +action.payload.price;
-        state.cart = [action.payload, ...state.cart];
+        state.cart = [...state.cart, action.payload];
       }
     },
     changeQuantity: (state, action) => {

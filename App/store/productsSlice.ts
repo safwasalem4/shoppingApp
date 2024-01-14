@@ -3,13 +3,12 @@ import axios from 'axios';
 
 export interface ProductsState {
   allProducts: any[];
-  limit: number;
   skip: number;
   loading: boolean;
   total: number;
 }
 
-export const insertProducts = createAsyncThunk(
+export const getProducts = createAsyncThunk(
   'products/getProducts',
   async ({ data }: any, thunkAPI) => {
     try {
@@ -32,7 +31,6 @@ const productsSlice = createSlice({
   name: 'products',
   initialState: {
     allProducts: [],
-    limit: 10,
     skip: 0,
     loading: false,
     total: 0,
@@ -40,11 +38,11 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(`${insertProducts.pending}`, state => {
+      .addCase(`${getProducts.pending}`, state => {
         state.loading = true;
       })
       .addCase(
-        `${insertProducts.fulfilled}`,
+        `${getProducts.fulfilled}`,
         (state, action: PayloadAction<any>) => {
           if (action.payload.skip === 0) {
             state.allProducts = [...action.payload.products];
@@ -59,7 +57,7 @@ const productsSlice = createSlice({
           state.loading = false;
         },
       )
-      .addCase(`${insertProducts.rejected}`, state => {
+      .addCase(`${getProducts.rejected}`, state => {
         state.loading = false;
       });
   },

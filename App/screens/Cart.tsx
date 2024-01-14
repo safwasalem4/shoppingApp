@@ -14,8 +14,8 @@ import {
 import {colors} from '../utils/colors';
 import {height} from '../utils/dimensions';
 import {useAppDispatch, useAppSelector} from '../utils/hooks';
-import {changeQuantity, clearCart} from '../store/cartSlice';
-import {useNavigation} from '@react-navigation/native';
+import {changeQuantity, clearCart, removeItem} from '../store/cartSlice';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import Specification from '../components/Specification';
 type RootStackParamList = {
@@ -26,11 +26,13 @@ const Cart = ({}) => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(state => state.cart);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const {colors: themeColors} = useTheme();
+
   return (
     <>
       <View>
         <SafeAreaView />
-        <Header title="Cart" backButton cart />
+        <Header title="Cart" backButton cart={false} />
         {data.cart.length == 0 ? (
           <Text style={styles.emptyScreen}>Not Data Found :(</Text>
         ) : (
@@ -54,12 +56,16 @@ const Cart = ({}) => {
                     <View style={styles.quantityContainer}>
                       <TouchableOpacity
                         onPress={() => {
-                          dispatch(
-                            changeQuantity({
-                              ...item,
-                              quantity: item.quantity - 1,
-                            }),
-                          );
+                          if (item.quantity == 1) {
+                            dispatch(removeItem(item));
+                          } else {
+                            dispatch(
+                              changeQuantity({
+                                ...item,
+                                quantity: item.quantity - 1,
+                              }),
+                            );
+                          }
                         }}>
                         <Image
                           source={require('../assets/minus.png')}
@@ -96,12 +102,20 @@ const Cart = ({}) => {
             <View style={styles.summeryContainer}>
               <Text style={styles.summeryTitle}>Summery</Text>
               <View style={styles.summery}>
-                <Text style={styles.title}>Total Products: </Text>
-                <Text style={styles.value}>{data.totalQuantity}</Text>
+                <Text style={[styles.title, {color: themeColors.text}]}>
+                  Total Products:{' '}
+                </Text>
+                <Text style={[styles.value, {color: themeColors.text}]}>
+                  {data.totalQuantity}
+                </Text>
               </View>
               <View style={styles.summery}>
-                <Text style={styles.title}>Total Price: </Text>
-                <Text style={styles.value}>{data.totalPrice} $</Text>
+                <Text style={[styles.title, {color: themeColors.text}]}>
+                  Total Price:{' '}
+                </Text>
+                <Text style={[styles.value, {color: themeColors.text}]}>
+                  {data.totalPrice} $
+                </Text>
               </View>
             </View>
           </>

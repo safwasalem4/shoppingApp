@@ -1,12 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {SpecificationProps} from './IComponents';
+import {useTheme} from '@react-navigation/native';
 
 const Specification = ({title, value}: SpecificationProps) => {
+  const {colors: themeColors} = useTheme();
   return (
     <View style={styles.specificationContainer}>
-      <Text style={styles.specificationsTitle}>{title}: </Text>
-      <Text style={styles.specification}>{value}</Text>
+      <Text style={[styles.specificationsTitle, {color: themeColors.text}]}>
+        {title + ': '}
+      </Text>
+      <Text style={[styles.specification, {color: themeColors.text}]}>
+        {value}
+      </Text>
     </View>
   );
 };

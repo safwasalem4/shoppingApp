@@ -4,7 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {colors} from '../utils/colors';
 import {HeaderProps} from './IComponents';
 import {useAppSelector} from '../utils/hooks';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 type RootStackParamList = {
   Cart: undefined;
@@ -18,22 +18,32 @@ const Header = ({
 }: HeaderProps) => {
   const cartLength = useAppSelector(state => state.cart.totalQuantity);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const {colors: themeColors} = useTheme();
+
   return (
     <View style={[style.container, {backgroundColor}]}>
       <View style={style.subContainer}>
         {backButton && (
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" style={style.backIcon} />
+            <AntDesign
+              name="arrowleft"
+              style={[style.backIcon, {color: themeColors.text}]}
+            />
           </TouchableOpacity>
         )}
-        <Text numberOfLines={1} style={style.title}>
+        <Text
+          numberOfLines={1}
+          style={[style.title, {color: themeColors.text}]}>
           {title}
         </Text>
         {cart && (
           <TouchableOpacity
             onPress={() => navigation.navigate('Cart')}
             style={style.cartContainer}>
-            <AntDesign name="shoppingcart" style={style.cartIcon} />
+            <AntDesign
+              name="shoppingcart"
+              style={[style.cartIcon, {color: themeColors.text}]}
+            />
             <View style={style.cartBadge}>
               <Text style={style.badge}>{cartLength}</Text>
             </View>

@@ -8,8 +8,10 @@ import {useAppDispatch} from '../utils/hooks';
 import {addCart} from '../store/cartSlice';
 import Container from '../components/Container';
 import Specification from '../components/Specification';
+import {useTheme} from '@react-navigation/native';
 
 const ProductDetails = ({route}) => {
+  const {colors: themeColors} = useTheme();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
   const {
@@ -33,18 +35,22 @@ const ProductDetails = ({route}) => {
 
         <View style={styles.detailsContainer}>
           <View>
-            <Text style={styles.title}>
+            <Text style={[styles.title, {color: themeColors.text}]}>
               {title + ' '}
-              <Text style={styles.rate}>
+              <Text style={[styles.rate, {color: themeColors.text}]}>
                 {'(' + rating.toFixed(1) + ' '}
                 <FontAwesome name="star" size={15} color={colors.orange} />
                 {')'}
               </Text>
             </Text>
           </View>
-          <Text style={styles.price}>{price} $</Text>
+          <Text style={[styles.price, , {color: themeColors.text}]}>
+            {price} $
+          </Text>
         </View>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={[styles.description, {color: themeColors.text}]}>
+          {description}
+        </Text>
         <Text style={styles.specifications}>Specifications:</Text>
         <Specification title={'Brand'} value={brand} />
         <Specification title={'Category'} value={category} />

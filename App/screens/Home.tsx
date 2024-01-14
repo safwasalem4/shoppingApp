@@ -10,19 +10,30 @@ import {
   FlatList,
   ActivityIndicator,
   SafeAreaView,
+  Switch,
 } from 'react-native';
 import {colors} from '../utils/colors';
 import {useAppDispatch, useAppSelector} from '../utils/hooks';
-import {insertProducts} from '../store/productsSlice';
+import {getProducts} from '../store/productsSlice';
+import {changeTheme} from '../store/themeSlice';
 
 const Home = ({navigation}) => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(state => state.products);
+  const theme = useAppSelector(state => state.theme.theme);
   const [refresh, setRefresh] = useState(false);
   const [skip, setSkip] = useState(0);
 
+  const toggleSwitch = () => {
+    if (theme == 'light') {
+      dispatch(changeTheme('dark'));
+    } else {
+      dispatch(changeTheme('light'));
+    }
+  };
+
   useEffect(() => {
-    dispatch(insertProducts({data: skip}));
+    dispatch(getProducts({data: skip}));
     setRefresh(false);
   }, [skip, refresh]);
 
@@ -30,10 +41,34 @@ const Home = ({navigation}) => {
     <View style={styles.container}>
       <SafeAreaView />
       <Header title="Products" backButton={false} />
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          paddingHorizontal: 16,
+        }}>
+        <Text
+          style={{
+            color: colors.mainColor,
+            fontWeight: 'bold',
+            fontSize: 16,
+          }}>
+          Dark theme
+        </Text>
+        <Switch
+          style={{transform: [{scaleX: 0.75}, {scaleY: 0.75}]}}
+          trackColor={{false: '#767577', true: colors.white}}
+          thumbColor={theme == 'dark' ? colors.mainColor : '#f4f3f4'}
+          ios_backgroundColor="#767577"
+          onValueChange={toggleSwitch}
+          value={theme == 'dark'}
+        />
+      </View>
       <FlatList
+        data={data.allProducts}
         refreshing={refresh}
         style={styles.flatList}
-        data={data.allProducts}
         onEndReachedThreshold={0.2}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item: any) => item.id}
