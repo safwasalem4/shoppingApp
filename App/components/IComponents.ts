@@ -17,3 +17,7 @@ export interface CardProps {
     children?: any;
     otherStyle?: any;
 }
+export interface SpecificationProps {
+    title: string;
+    value: string;
+}

@@ -17,13 +17,13 @@ const Container = ({
 
   return (
     <View
-      style={{
-        backgroundColor: backgroundColor ?? colors.background,
-        height: '100%',
-        width: '100%',
-        flex: 1,
-        ...otherStyle,
-      }}>
+      style={[
+        styles.container,
+        {
+          backgroundColor: backgroundColor ?? colors.background,
+          ...otherStyle,
+        },
+      ]}>
       <SafeAreaView />
       <Header
         cart={cart}
@@ -31,21 +31,20 @@ const Container = ({
         title={headerTitle}
         backgroundColor={headerBackgroundColor}
       />
-      <View style={style.main}>{children}</View>
+      <View style={styles.main}>{children}</View>
     </View>
   );
 };
 
 export default Container;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
     flex: 1,
   },
   main: {
-    // backgroundColor: 'blue',
     padding: 16,
   },
 });

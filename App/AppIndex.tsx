@@ -24,8 +24,7 @@ const AppIndex: React.FC<NavigationContainerProps> = () => {
 
   return (
     <NavigationContainer
-      theme={colorThemeDevice === 'dark' ? MyDarkTheme : MyLightTheme}
-      children={undefined}>
+      theme={colorThemeDevice === 'dark' ? MyDarkTheme : MyLightTheme}>
       <StatusBar
         barStyle={
           colorThemeDevice === 'dark' ? 'light-content' : 'dark-content'

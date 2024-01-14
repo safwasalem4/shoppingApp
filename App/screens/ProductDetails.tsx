@@ -7,6 +7,7 @@ import {colors} from '../utils/colors';
 import {useAppDispatch} from '../utils/hooks';
 import {addCart} from '../store/cartSlice';
 import Container from '../components/Container';
+import Specification from '../components/Specification';
 
 const ProductDetails = ({route}) => {
   const [quantity, setQuantity] = useState(1);
@@ -45,24 +46,13 @@ const ProductDetails = ({route}) => {
         </View>
         <Text style={styles.description}>{description}</Text>
         <Text style={styles.specifications}>Specifications:</Text>
-        <View style={styles.specificationContainer}>
-          <Text style={styles.specificationsTitle}>Brand: </Text>
-          <Text style={styles.specification}>{brand}</Text>
-        </View>
-        <View style={styles.specificationContainer}>
-          <Text style={styles.specificationsTitle}>Category: </Text>
-          <Text style={styles.specification}>{category}</Text>
-        </View>
-        <View style={styles.specificationContainer}>
-          <Text style={styles.specificationsTitle}>Discount: </Text>
-          <Text style={styles.specification}>
-            {discountPercentage.toFixed(1)} %
-          </Text>
-        </View>
-        <View style={styles.specificationContainer}>
-          <Text style={styles.specificationsTitle}>In Stock: </Text>
-          <Text style={styles.specification}>{stock}</Text>
-        </View>
+        <Specification title={'Brand'} value={brand} />
+        <Specification title={'Category'} value={category} />
+        <Specification
+          title={'Discount'}
+          value={`${discountPercentage.toFixed(1)}%`}
+        />
+        <Specification title={'In Stock'} value={stock} />
       </Container>
 
       <View style={styles.buttonStyle}>
@@ -125,17 +115,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.mainColor,
   },
-  specificationContainer: {
-    marginTop: 8,
-    flexDirection: 'row',
-  },
-  specificationsTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  specification: {
-    fontSize: 16,
-  },
   detailsContainer: {
     marginVertical: 16,
     flexDirection: 'row',
@@ -177,13 +156,5 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: colors.white,
     padding: 10,
-  },
-  button: {
-    borderRadius: 5,
-    padding: 10,
-    elevation: 2,
-    paddingHorizontal: 15,
-    backgroundColor: colors.darkOrange,
-    marginHorizontal: 5,
   },
 });

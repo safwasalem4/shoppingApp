@@ -17,6 +17,7 @@ import {useAppDispatch, useAppSelector} from '../utils/hooks';
 import {changeQuantity, clearCart} from '../store/cartSlice';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import Specification from '../components/Specification';
 type RootStackParamList = {
   Home: undefined;
 };
