@@ -6,6 +6,8 @@ import {
   NavigationContainerProps,
 } from '@react-navigation/native';
 import Home from './screens/Home';
+import ProductDetails from './screens/ProductDetails';
+import Cart from './screens/Cart';
 import {MyDarkTheme, MyLightTheme} from './utils/themes';
 import {useAppDispatch, useAppSelector} from './utils/hooks';
 import {changeTheme} from './store/themeSlice';
@@ -22,7 +24,8 @@ const AppIndex: React.FC<NavigationContainerProps> = () => {
 
   return (
     <NavigationContainer
-      theme={colorThemeDevice === 'dark' ? MyDarkTheme : MyLightTheme}>
+      theme={colorThemeDevice === 'dark' ? MyDarkTheme : MyLightTheme}
+      children={undefined}>
       <StatusBar
         barStyle={
           colorThemeDevice === 'dark' ? 'light-content' : 'dark-content'
@@ -35,6 +38,8 @@ const AppIndex: React.FC<NavigationContainerProps> = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Cart" component={Cart} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
