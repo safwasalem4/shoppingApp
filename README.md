@@ -51,6 +51,5 @@ To get the development environment running, follow these steps:
 - Shopping Cart: Add and remove products, view total price and quantity.
 - Dark Mode: Switch between light and dark themes.
 
-## Authors
-
-- **Your Name** - _Initial work_ - [safwasalem4](https://github.com/safwasalem4)
+## Screenshots from my device
+https://drive.google.com/drive/folders/1-BZyVCEWF_Dh8KFWogoseyYbhukFLoew?usp=sharing
