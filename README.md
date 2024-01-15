@@ -43,6 +43,7 @@ To get the development environment running, follow these steps:
 - FlatList Component (from React Native)
 - Mock API
 - Performance Optimization Techniques
+- All technologies summary (https://docs.google.com/document/d/1MZETemSZk_qwPhDNr27HWMIfi19r4RmshvenZ8afzyw/edit)
 
 ## Features
 
